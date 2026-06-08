@@ -1,0 +1,13 @@
+# Chrome Extension specific ignores
+*.zip
+*.crx
+node_modules/
+dist/
+build/
+
+# OS-specific temporary files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
