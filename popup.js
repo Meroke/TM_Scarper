@@ -26,7 +26,14 @@ const readFromTab = async (tab) => {
   } catch {
     await chrome.scripting.executeScript({
       target: { tabId: tab.id },
-      files: ["excel.js", "content.js"]
+      files: [
+        "excel.js",
+        "product-extractor.js",
+        "collection-store.js",
+        "clipboard.js",
+        "collector-widget.js",
+        "content.js"
+      ]
     });
     return chrome.tabs.sendMessage(tab.id, { type: "TMALL_READ_PRODUCT" });
   }
