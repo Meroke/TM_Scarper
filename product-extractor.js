@@ -4,7 +4,12 @@
   const pickText = (selectors) => {
     for (const selector of selectors) {
       const node = document.querySelector(selector);
-      const value = node?.content || node?.innerText || node?.textContent || "";
+      const value =
+        node?.content ||
+        node?.getAttribute?.("title") ||
+        node?.innerText ||
+        node?.textContent ||
+        "";
       const text = value.trim();
       if (text) return text;
     }
@@ -26,10 +31,15 @@
     const selectors = [
       'meta[property="og:image"]',
       'meta[name="twitter:image"]',
+      "#J_ImgBooth",
+      "#J_UlThumb img",
       ".tb-booth img",
       ".tb-gallery img",
+      ".tb-pic img",
       '[class*="mainPic"] img',
       '[class*="MainPic"] img',
+      '[class*="PicGallery"] img',
+      '[class*="thumbnail"] img',
       '[class*="gallery"] img',
       "img"
     ];
@@ -65,6 +75,25 @@
     return "";
   };
 
+  const findScriptPrice = () => {
+    const scripts = [...document.scripts]
+      .map((script) => script.textContent || "")
+      .filter((text) => /price|promotion|sku|item/i.test(text));
+    const patterns = [
+      /"(?:price|priceText|promotionPrice|currentPrice|salePrice)"\s*:\s*"?[¥￥]?\s*(\d+(?:\.\d+)?)/i,
+      /"(?:priceText|price)"\s*:\s*"[¥￥]?\s*(\d+(?:\.\d+)?)/i,
+      /[¥￥]\s*(\d+(?:\.\d+)?)/
+    ];
+
+    for (const text of scripts) {
+      for (const pattern of patterns) {
+        const match = text.match(pattern);
+        if (match?.[1]) return match[1];
+      }
+    }
+    return "";
+  };
+
   const cleanPrice = (value) => {
     const text = String(value || "").replace(/,/g, "");
     const match = text.match(/\d+(?:\.\d+)?/);
@@ -74,8 +103,13 @@
   const readSelectedSku = () => {
     const selectors = [
       '[aria-selected="true"]',
+      '[aria-checked="true"]',
       ".tb-selected",
       ".tm-selected",
+      '[class*="isSelected"]',
+      '[class*="sku"][class*="active"]',
+      '[class*="Sku"][class*="active"]',
+      '[data-value][class*="selected"]',
       '[class*="selected"]',
       '[class*="Selected"]'
     ];
@@ -88,7 +122,7 @@
     const isSkuText = (value) =>
       value &&
       value.length <= 80 &&
-      !/^(宝贝|详情|评价|推荐|店铺|客服|首页|购物车|收藏)$/u.test(value);
+      !/^(宝贝|详情|评价|推荐|店铺|客服|首页|购物车|收藏|全部|销量|价格|综合|已选|请选择)$/u.test(value);
 
     for (const selector of selectors) {
       for (const node of document.querySelectorAll(selector)) {
@@ -112,11 +146,21 @@
   const readProduct = () => {
     const name =
       pickText([
+        "#tbpcDetail_SkuPanelBody [class*='MainTitle'] span",
+        "#tbpcDetail_SkuPanelBody [class*='mainTitle']",
+        "[class*='MainTitle'][class*='f-els'] span",
+        "span[class*='mainTitle']",
+        ".tb-detail-hd h1",
+        ".tb-main-title",
+        ".tb-title h3",
+        "#J_Title h3",
+        '[class*="ItemHeader"] h1',
+        '[class*="ItemTitle"]',
+        '[class*="mainTitle"]',
+        '[class*="MainTitle"]',
+        '[class*="title--"]',
         'meta[property="og:title"]',
         'meta[name="title"]',
-        ".tb-detail-hd h1",
-        '[class*="ItemHeader"] h1',
-        '[class*="mainTitle"]',
         "h1"
       ]) || document.title.replace(/[-_].*$/, "").trim();
 
@@ -124,11 +168,18 @@
       pickText([
         'meta[property="product:price:amount"]',
         'meta[itemprop="price"]',
+        "#J_StrPrice .tb-rmb-num",
+        "#J_PromoPriceNum",
+        ".tb-price .tb-rmb-num",
         ".tm-promo-price .tm-price",
         ".tm-price",
+        '[class*="priceText"]',
+        '[class*="PriceText"]',
         '[class*="Price"]',
         '[class*="price"]'
-      ]) || findJsonLdPrice();
+      ]) ||
+      findJsonLdPrice() ||
+      findScriptPrice();
 
     return {
       image: pickImage(),

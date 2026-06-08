@@ -432,7 +432,7 @@
         const blob = await window.TmallExcel.createWorkbookBlob(selectedItems, (_error, row) => {
           setStatus(`部分首图处理失败：${row.name || "未识别商品"}`);
         });
-        const filename = `tmall-products-${new Date().toISOString().slice(0, 10)}.xlsx`;
+        const filename = `taobao-tmall-products-${new Date().toISOString().slice(0, 10)}.xlsx`;
         triggerDownload(blob, filename);
         setStatus(`已导出 ${selectedItems.length} 项。`);
       } catch (error) {

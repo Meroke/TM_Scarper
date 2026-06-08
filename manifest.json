@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Tmall Product Exporter",
-  "description": "Export current Tmall product information to an Excel-compatible file.",
-  "version": "0.3.0",
+  "name": "Taobao Tmall Product Exporter",
+  "description": "Export current Taobao or Tmall product information to an Excel-compatible file.",
+  "version": "0.4.0",
   "permissions": ["activeTab", "scripting", "downloads", "storage"],
   "host_permissions": [
     "*://*.tmall.com/*",
@@ -12,12 +12,17 @@
     "*://*.taobao.com/*"
   ],
   "action": {
-    "default_title": "Export Tmall Product",
+    "default_title": "Export Taobao/Tmall Product",
     "default_popup": "popup.html"
   },
   "content_scripts": [
     {
-      "matches": ["*://*.tmall.com/*", "*://detail.tmall.com/*"],
+      "matches": [
+        "*://*.tmall.com/*",
+        "*://detail.tmall.com/*",
+        "*://*.taobao.com/*",
+        "*://item.taobao.com/*"
+      ],
       "js": [
         "excel.js",
         "product-extractor.js",

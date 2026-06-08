@@ -75,7 +75,7 @@ const exportExcel = async () => {
     setStatus("首图处理失败，将导出无图片版本。", true);
   });
   const url = URL.createObjectURL(blob);
-  const filename = `tmall-product-${new Date().toISOString().slice(0, 10)}.xlsx`;
+  const filename = `taobao-tmall-product-${new Date().toISOString().slice(0, 10)}.xlsx`;
 
   await chrome.downloads.download({ url, filename, saveAs: true });
   setStatus("已生成 Excel 文件。");
@@ -87,8 +87,8 @@ readButton.addEventListener("click", async () => {
 
   try {
     const tab = await getActiveTab();
-    if (!tab?.url || !/tmall\.com/i.test(tab.url)) {
-      throw new Error("请先打开天猫商品详情页。");
+    if (!tab?.url || !/(tmall|taobao)\.com/i.test(tab.url)) {
+      throw new Error("请先打开淘宝或天猫商品详情页。");
     }
 
     const response = await readFromTab(tab);
