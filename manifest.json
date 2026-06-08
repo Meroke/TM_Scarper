@@ -2,8 +2,8 @@
   "manifest_version": 3,
   "name": "Tmall Product Exporter",
   "description": "Export current Tmall product information to an Excel-compatible file.",
-  "version": "0.2.0",
-  "permissions": ["activeTab", "scripting", "downloads"],
+  "version": "0.3.0",
+  "permissions": ["activeTab", "scripting", "downloads", "storage"],
   "host_permissions": [
     "*://*.tmall.com/*",
     "*://detail.tmall.com/*",
@@ -18,7 +18,7 @@
   "content_scripts": [
     {
       "matches": ["*://*.tmall.com/*", "*://detail.tmall.com/*"],
-      "js": ["content.js"],
+      "js": ["excel.js", "content.js"],
       "run_at": "document_idle"
     }
   ]
