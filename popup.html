@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tmall Exporter</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="panel">
+      <header>
+        <h1>天猫商品导出</h1>
+        <p id="status">打开天猫商品页后点击读取。</p>
+      </header>
+
+      <section class="preview" id="preview" hidden>
+        <img id="imagePreview" alt="商品首图" />
+        <div>
+          <strong id="namePreview"></strong>
+          <span id="pricePreview"></span>
+        </div>
+      </section>
+
+      <label>
+        数量
+        <input id="quantity" type="number" min="1" step="1" value="1" />
+      </label>
+
+      <label>
+        备注
+        <textarea id="remark" rows="3" placeholder="可选"></textarea>
+      </label>
+
+      <div class="actions">
+        <button id="readButton" type="button">读取当前页</button>
+        <button id="exportButton" type="button" disabled>导出 Excel</button>
+      </div>
+    </main>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

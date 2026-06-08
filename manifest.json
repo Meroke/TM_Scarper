@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "Tmall Product Exporter",
+  "description": "Export current Tmall product information to an Excel-compatible file.",
+  "version": "0.2.0",
+  "permissions": ["activeTab", "scripting", "downloads"],
+  "host_permissions": [
+    "*://*.tmall.com/*",
+    "*://detail.tmall.com/*",
+    "*://*.alicdn.com/*",
+    "*://*.tbcdn.cn/*",
+    "*://*.taobao.com/*"
+  ],
+  "action": {
+    "default_title": "Export Tmall Product",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.tmall.com/*", "*://detail.tmall.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

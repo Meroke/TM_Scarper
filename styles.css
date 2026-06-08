@@ -1,0 +1,133 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 340px;
+  margin: 0;
+  color: #1f2933;
+  background: #eef3f1;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+}
+
+.panel {
+  padding: 18px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(238, 243, 241, 0.92)),
+    repeating-linear-gradient(45deg, rgba(33, 96, 88, 0.08) 0 1px, transparent 1px 12px);
+}
+
+header {
+  margin-bottom: 14px;
+}
+
+h1 {
+  margin: 0 0 6px;
+  font-size: 19px;
+  line-height: 1.25;
+}
+
+p {
+  margin: 0;
+  color: #5f6f6b;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.error {
+  color: #b42318;
+}
+
+.preview {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 12px;
+  align-items: center;
+  margin: 14px 0;
+  padding: 10px;
+  border: 1px solid #c9d8d3;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.preview img {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: #dbe7e3;
+}
+
+.preview strong {
+  display: block;
+  max-height: 42px;
+  overflow: hidden;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.preview span {
+  display: block;
+  margin-top: 5px;
+  color: #0f766e;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+label {
+  display: block;
+  margin-top: 12px;
+  color: #34443f;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+input,
+textarea {
+  width: 100%;
+  margin-top: 6px;
+  border: 1px solid #b8cac4;
+  border-radius: 7px;
+  padding: 9px 10px;
+  color: #1f2933;
+  background: #fff;
+  font: inherit;
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #0f766e;
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.16);
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+button {
+  border: 0;
+  border-radius: 7px;
+  padding: 10px 12px;
+  color: #fff;
+  background: #0f766e;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:first-child {
+  background: #2f514b;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
