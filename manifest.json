@@ -13,7 +13,7 @@
   ],
   "action": {
     "default_title": "Export Taobao/Tmall Product",
-    "default_popup": "popup.html"
+    "default_popup": "src/popup/popup.html"
   },
   "content_scripts": [
     {
@@ -24,12 +24,12 @@
         "*://item.taobao.com/*"
       ],
       "js": [
-        "excel.js",
-        "product-extractor.js",
-        "collection-store.js",
-        "clipboard.js",
-        "collector-widget.js",
-        "content.js"
+        "src/common/excel.js",
+        "src/content/product-extractor.js",
+        "src/content/collection-store.js",
+        "src/content/clipboard.js",
+        "src/content/collector-widget.js",
+        "src/content/content.js"
       ],
       "run_at": "document_idle"
     }

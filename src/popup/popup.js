@@ -9,6 +9,7 @@ const quantityInput = document.querySelector("#quantity");
 const remarkInput = document.querySelector("#remark");
 
 let currentProduct = null;
+const contentScriptFiles = window.TmallExporterContentScriptFiles || ["content.js"];
 
 const setStatus = (text, isError = false) => {
   statusNode.textContent = text;
@@ -26,14 +27,7 @@ const readFromTab = async (tab) => {
   } catch {
     await chrome.scripting.executeScript({
       target: { tabId: tab.id },
-      files: [
-        "excel.js",
-        "product-extractor.js",
-        "collection-store.js",
-        "clipboard.js",
-        "collector-widget.js",
-        "content.js"
-      ]
+      files: contentScriptFiles
     });
     return chrome.tabs.sendMessage(tab.id, { type: "TMALL_READ_PRODUCT" });
   }

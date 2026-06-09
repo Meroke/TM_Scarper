@@ -1,0 +1,1 @@
+window.TmallExporterContentScriptFiles = ["content.js"];
